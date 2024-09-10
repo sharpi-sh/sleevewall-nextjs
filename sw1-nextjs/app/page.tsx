@@ -105,6 +105,7 @@ export default function Home() {
   const albumCoverRef = useRef<HTMLDivElement>(null)
   const animationFrameRef = useRef<number | null>(null)
   const lastUpdateTimeRef = useRef<number>(0)
+  const requestMade = useRef(false)
 
   const initialAlbumsData = useMemo(() => Array.from({ length: TOTAL_ALBUMS }, (_, i) => generateAlbum(i + 1)), [])
   const [albumsData, setAlbumsData] = useState(initialAlbumsData)
@@ -354,6 +355,49 @@ export default function Home() {
   const handleTooltipLeave = () => {
     setTooltipContent(null)
   }
+
+  useEffect(() => {
+    if (requestMade.current) return; // Exit if request has already been made
+
+    const firstQuery = `
+    query getPosts {
+      posts(last: 75, where: {status: PUBLISH, orderby: {field: DATE, order: DESC}}) {
+        nodes {
+          id
+          title
+          date
+          slug
+          postId
+          featuredImage {
+            node {
+              sourceUrl
+            }
+          }
+          postFields {
+            youtubeLink
+            sleevewallrating
+          }
+        }
+      }
+    }
+    `;
+
+    fetch('https://sleevewall.sharpi.sh/graphql', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        query: firstQuery
+      }),
+    })
+    .then(response => response.json())
+    .then(data => {
+      console.log(data);
+      requestMade.current = true; // Mark that the request has been made
+    })
+    .catch(error => console.error('Error:', error));
+  }, []); // Empty dependency array ensures this runs only once when the component mounts
 
   return (
     <div className="relative min-h-screen bg-black overflow-hidden">
