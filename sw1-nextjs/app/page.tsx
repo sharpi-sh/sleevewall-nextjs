@@ -369,7 +369,7 @@ export default function Home() {
           {[...Array(columnCount)].map((_, columnIndex) => (
             <div
               key={columnIndex}
-              ref={(el) => (columnRefs.current[columnIndex] = el)}
+              ref={(el) => { columnRefs.current[columnIndex] = el }}
               className="flex flex-col"
               style={{
                 width: `calc(${100 / columnCount}% - ${ALBUM_GAP * (columnCount - 1) / columnCount}px)`,
