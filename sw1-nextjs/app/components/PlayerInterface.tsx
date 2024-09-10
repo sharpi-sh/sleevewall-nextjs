@@ -45,7 +45,7 @@ export default function PlayerInterface({
   handleTooltipLeave
 }: PlayerInterfaceProps) {
   return (
-    <div className="w-96 h-96 bg-black bg-opacity-60 rounded-full flex items-center justify-center backdrop-blur-md pointer-events-auto shadow-lg" style={{ boxShadow: '0 0 30px rgba(0, 0, 0, 0.5)' }}>
+    <div id="player_interface" className="w-96 h-96 bg-black bg-opacity-60 rounded-full flex items-center justify-center backdrop-blur-md pointer-events-auto shadow-lg" style={{ boxShadow: '0 0 30px rgba(0, 0, 0, 0.5)' }}>
       <div className="w-88 h-88 bg-gray-800 rounded-full flex items-center justify-center relative overflow-hidden">
         <div
           className="absolute inset-0 w-full h-full"

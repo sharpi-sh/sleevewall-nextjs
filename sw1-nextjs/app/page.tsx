@@ -2,8 +2,9 @@
 'use client'
 import Image from "next/image";
 import React, { useState, useEffect, useRef, useMemo, useCallback } from 'react'
-import { Search, Shuffle, ArrowRight, X } from 'lucide-react'
+import { Search, Shuffle, ArrowRight, X, Pause, Play } from 'lucide-react'
 import PlayerInterface from './components/PlayerInterface'
+import SearchShuffleButtons from './components/SearchShuffleButtons'
 
 const TOTAL_ALBUMS = 75
 const ALBUM_GAP = 16
@@ -63,6 +64,20 @@ const generateAlbum = (id: number) => {
     cover: svgString
   }
 }
+
+const SkipBackIcon = ({ size = 19 }) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M19 20L9 12l10-8v16z" fill="currentColor" />
+    <rect x="5" y="4" width="2" height="16" fill="currentColor" />
+  </svg>
+)
+
+const SkipForwardIcon = ({ size = 19 }) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M5 4l10 8-10 8V4z" fill="currentColor" />
+    <rect x="17" y="4" width="2" height="16" fill="currentColor" />
+  </svg>
+)
 
 export default function Home() {
   const [isPlaying, setIsPlaying] = useState(false)
@@ -405,26 +420,12 @@ export default function Home() {
           handleTooltipLeave={handleTooltipLeave}
         />
       </div>
-      <div className="fixed top-4 left-4 z-30 flex space-x-4">
-        <button
-          onClick={toggleSearch}
-          className="bg-white text-black p-3 rounded-full shadow-lg hover:bg-green-500 hover:text-white transition-colors duration-300 ease-in-out"
-          onMouseEnter={(e) => handleTooltipEnter(e, 'Search')}
-          onMouseLeave={handleTooltipLeave}
-          aria-label="Toggle search"
-        >
-          <Search size={24} />
-        </button>
-        <button
-          onClick={shuffleAndReload}
-          className="bg-white text-black p-3 rounded-full shadow-lg hover:bg-green-500 hover:text-white transition-colors duration-300 ease-in-out"
-          onMouseEnter={(e) => handleTooltipEnter(e, 'Shuffle albums')}
-          onMouseLeave={handleTooltipLeave}
-          aria-label="Shuffle and reload"
-        >
-          <Shuffle size={24} />
-        </button>
-      </div>
+      <SearchShuffleButtons
+        toggleSearch={toggleSearch}
+        shuffleAndReload={shuffleAndReload}
+        handleTooltipEnter={handleTooltipEnter}
+        handleTooltipLeave={handleTooltipLeave}
+      />
       {(isSearchVisible || isSearchFading) && (
         <div className={`fixed top-0 left-0 right-0 z-40 flex items-center justify-center mt-4 transition-opacity duration-300 ${isSearchFading ? 'opacity-0' : 'opacity-100'}`}>
           <div className="flex items-center bg-white rounded-full shadow-lg overflow-hidden" style={{ border: '4px solid rgba(0, 0, 0, 0.8)' }}>
