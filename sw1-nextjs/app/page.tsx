@@ -1,8 +1,8 @@
 
 'use client'
-import Image from "next/image";
+//import Image from "next/image";
 import React, { useState, useEffect, useRef, useMemo, useCallback } from 'react'
-import { Search, Shuffle, ArrowRight, X, Pause, Play } from 'lucide-react'
+import {  ArrowRight, X } from 'lucide-react' // Search, Shuffle, ArrowRight, X, Pause, Play
 import PlayerInterface from './components/PlayerInterface'
 import SearchShuffleButtons from './components/SearchShuffleButtons'
 
