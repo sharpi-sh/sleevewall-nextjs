@@ -65,23 +65,23 @@ const generateAlbum = (id: number) => {
   }
 }
 
-const SkipBackIcon = ({ size = 19 }) => (
-  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <path d="M19 20L9 12l10-8v16z" fill="currentColor" />
-    <rect x="5" y="4" width="2" height="16" fill="currentColor" />
-  </svg>
-)
+// const SkipBackIcon = ({ size = 19 }) => (
+//   <svg width={size} height={size} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+//     <path d="M19 20L9 12l10-8v16z" fill="currentColor" />
+//     <rect x="5" y="4" width="2" height="16" fill="currentColor" />
+//   </svg>
+// )
 
-const SkipForwardIcon = ({ size = 19 }) => (
-  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <path d="M5 4l10 8-10 8V4z" fill="currentColor" />
-    <rect x="17" y="4" width="2" height="16" fill="currentColor" />
-  </svg>
-)
+// const SkipForwardIcon = ({ size = 19 }) => (
+//   <svg width={size} height={size} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+//     <path d="M5 4l10 8-10 8V4z" fill="currentColor" />
+//     <rect x="17" y="4" width="2" height="16" fill="currentColor" />
+//   </svg>
+// )
 
 export default function Home() {
   const [isPlaying, setIsPlaying] = useState(false)
-  const [progress, setProgress] = useState(0)
+  const [progress /*, setProgress*/] = useState(0)
   const [columnCount, setColumnCount] = useState(5)
   const [isParallaxEnabled, setIsParallaxEnabled] = useState(true)
   const [isFading, setIsFading] = useState(false)
@@ -98,11 +98,11 @@ export default function Home() {
   const [rotation, setRotation] = useState(0)
   const [rotationVelocity, setRotationVelocity] = useState(0)
 
-  const playerRef = useRef<HTMLDivElement>(null)
+  //const playerRef = useRef<HTMLDivElement>(null)
   const columnRefs = useRef<(HTMLDivElement | null)[]>([])
   const containerRef = useRef<HTMLDivElement>(null)
   const scrollContainerRef = useRef<HTMLDivElement>(null)
-  const albumCoverRef = useRef<HTMLDivElement>(null)
+  //const albumCoverRef = useRef<HTMLDivElement>(null)
   const animationFrameRef = useRef<number | null>(null)
   const lastUpdateTimeRef = useRef<number>(0)
   const requestMade = useRef(false)
